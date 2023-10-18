@@ -1,0 +1,18 @@
+@import "../../../styles/variables";
+
+.button {
+  background-color: $school-bus-yellow;
+  color: $black;
+  padding: 0.781em 5.844em;
+  border: none;
+  border-radius: 3rem;
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  
+  &:hover {
+    background-color: $button-hover;
+  }
+  &:active {
+    transform: translateY(0.125rem);
+  }
+}

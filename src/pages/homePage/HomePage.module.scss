@@ -1,0 +1,30 @@
+@import "../../styles/variables";
+
+.homePage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: $athens-gray;
+  flex: 1;
+  max-width: $max-content-width;
+  width: 100%;
+  padding: .7rem;
+  gap: 10rem;
+
+  .destructuring {
+    display: grid;
+    grid-template-columns: repeat(2, auto);
+    align-items: center;
+
+    .destrImage {
+      width: 100%; 
+      height: 116px; 
+    }
+
+    .webLogoImage {
+      width: 100%; 
+      height: 333px; 
+    }
+  }
+}
