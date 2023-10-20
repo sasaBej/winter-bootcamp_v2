@@ -1,0 +1,22 @@
+@import "../../../styles/variables";
+
+
+.inputField{
+  label {
+    color: $prussian-blue;
+    font-weight: $font-weight-bold;  
+  }
+
+  .requiredStar {
+    &::after {
+      content: '*';
+      color: $error-color;
+    }
+  }
+
+  input {
+    width: 100%;
+    padding: 2px 2px 2px 8px;
+  }
+ 
+} 

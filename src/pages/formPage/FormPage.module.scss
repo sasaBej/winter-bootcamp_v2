@@ -1,0 +1,76 @@
+@import "../../styles/variables";
+
+.formPage{
+  flex:1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  max-width: $max-content-width;
+  background-color: $athens-gray;
+  width: 100%;
+  padding: .7rem;
+
+  h2 {
+    font-size: 1.75rem;
+    font-weight: $font-weight-bold;
+    color: $prussian-blue;
+    padding: 3.75rem;
+  }
+
+  .form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    max-width: 51rem;
+    width: 100%;
+
+    h3 {
+      align-self: self-start;
+      font-size: 1.25rem;
+      font-weight: $font-weight-bold;
+      color: $prussian-blue;
+      padding: 1rem 0;
+    }
+
+    .contactInfoInputs {
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      align-items: center;
+      gap: 1.125rem 1.75rem;
+    }
+
+
+    .checkFields {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 8.75rem;
+      padding: 2.25rem 0;
+
+      .errors{
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-self: flex-start;
+        color: $error-color;
+        font-size: .875rem;
+        
+        p {
+          padding-bottom: 6px;
+        }
+
+        ul {
+          
+          li {
+            list-style-type: disc;
+            margin-left: 1rem;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import destructuring from "../../assets/img/destructuring.svg";
 import webLogo from "../../assets/img/WebPage_logo.svg";
 import { Button } from "../components/button/Button";
@@ -11,7 +12,9 @@ export const HomePage = () => {
         <img className={styles.destrImage} src={destructuring} alt="destructuring" />
         <img className={styles.webLogoImage} src={webLogo} alt="webLogo" />
       </div>
-      <Button title={"Join Us"} />
+      <Link to="/form">
+        <Button title={"Join Us"} />
+      </Link>
     </div >
   )
 };
