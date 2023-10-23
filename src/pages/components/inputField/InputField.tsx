@@ -40,7 +40,8 @@ export const InputField = ({
         placeholder={placeholder}
         className={classNames(styles.input, {
           [styles.inputValid]: isValid,
-          [styles.inputError]: !isValid
+          [styles.inputError]: !isValid,
+          [styles.unRequired]: !required
         })}
       />
     </div >
