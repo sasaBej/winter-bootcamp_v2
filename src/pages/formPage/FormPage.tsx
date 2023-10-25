@@ -5,6 +5,10 @@ import { observer } from "mobx-react-lite";
 import { FormDataContext } from "./FormPage.store";
 import { useFormValidation } from "./hooks/useFormValidation";
 import styles from "./FormPage.module.scss";
+import { SelectField } from "../components/selectField/SelectField";
+import { CountriesDataContext } from "../../shared/stores/CountryData.store";
+
+const names = Array.from({ length: 1000 }, (_, i) => `Name ${i + 1}`);
 
 export const FormPage = observer(() => {
   const {
@@ -21,17 +25,22 @@ export const FormPage = observer(() => {
     setAddressLine1Value,
     setAddressLine2Value,
     setAddressLineIsTouched,
+    setCountryValue,
+    setCountryIsTouched,
     reset
   } = useContext(FormDataContext);
+
+  const { countriesData, fetchData } = useContext(CountriesDataContext);
 
   const validateError = useFormValidation();
 
   useEffect(() => {
+    fetchData();
+
     return () => {
       reset()
     }
   }, [reset]);
-
 
   return (
     <section className={styles.formPage}>
@@ -101,11 +110,52 @@ export const FormPage = observer(() => {
             onChange={setAddressLine2Value}
           />
         </div>
-        <div className={styles.countryInptus}>
-          <input type="text" />
-          <input type="text" />
-          <input type="text" />
+        <div className={styles.countryInputs}>
+          <SelectField
+            required={true}
+            labelTitle="Country"
+            onChange={setCountryValue}
+            selected={formData.country}
+            onFocus={setCountryIsTouched}
+            isValid={!formErrors.countryError.isTouched || !formErrors.countryError.message}
+            children={
+              names.map((country, index) => (
+                <option key={index}>{country}</option>
+              ))
+            }
+          />
+          <SelectField
+            required={true}
+            labelTitle="Country"
+            onChange={setCountryValue}
+            selected={formData.country}
+            onFocus={setCountryIsTouched}
+            isValid={!formErrors.countryError.isTouched || !formErrors.countryError.message}
+            children={
+              names.map((country, index) => (
+                <option key={index}>{country}</option>
+              ))
+            }
+          />
+          <SelectField
+            required={true}
+            labelTitle="Country"
+            onChange={setCountryValue}
+            selected={formData.country}
+            onFocus={setCountryIsTouched}
+            isValid={!formErrors.countryError.isTouched || !formErrors.countryError.message}
+            children={
+              names.map((country, index) => (
+                <option key={index}>{country}</option>
+              ))
+            }
+          />
+
         </div>
+        {
+
+          countriesData?.map(country => <p>{country.name}</p>)
+        }
         <div className={styles.checkFields}>
           <div className={styles.errors}>
             {validateError() ? <div>Please fix the following errors to proceed:</div> : ""}
@@ -114,6 +164,7 @@ export const FormPage = observer(() => {
             <p>{formErrors.phoneNumberError.isTouched ? formErrors.phoneNumberError.message : ""}</p>
             <p>{formErrors.emailError.isTouched ? formErrors.emailError.message : ""}</p>
             <p>{formErrors.addressLineError.isTouched ? formErrors.addressLineError.message : ""}</p>
+            <p>{formErrors.countryError.isTouched ? formErrors.countryError.message : ""}</p>
           </div>
           <Button title="Send" />
         </div>

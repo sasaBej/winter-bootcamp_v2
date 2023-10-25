@@ -32,8 +32,9 @@ export class FormPageStore {
 
   public setAddressLine2Value = (value: string) => this.formData.addressLine2 = value;
 
-
-
+  public setCountryValue = (value: string) => this.formData.country = value;
+  public setCountryError = (value: string) => this.formErrors.countryError.message = value;
+  public setCountryIsTouched = () => this.formErrors.countryError.isTouched = true;
 
   public reset = () => {
     this.formData = EMPTY_FORM_DATA;

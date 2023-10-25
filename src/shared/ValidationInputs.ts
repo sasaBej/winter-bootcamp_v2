@@ -43,3 +43,11 @@ export const addressValidation = (name: string) => {
 
   return "";
 }
+
+export const countryValidation = (name: string) => {
+  if (!name.length) {
+    return "Country is required";
+  }
+
+  return "";
+}

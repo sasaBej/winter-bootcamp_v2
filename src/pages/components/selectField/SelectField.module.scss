@@ -1,0 +1,43 @@
+@import "../../../styles/variables";
+
+.selectField {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  label {
+    color: $prussian-blue;
+    font-weight: $font-weight-bold;  
+    line-height: normal;
+  }
+
+  .requiredStar {
+    &::after {
+      content: '*';
+      color: $error-color;
+    }
+  }
+  select {
+    width: 100%;
+    padding: 2px 2px 2px 8px;
+    border: 1px solid $prussian-blue;
+    outline: none;
+    box-shadow: 5px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    
+    option:disabled {
+      color: rgba(226, 226, 226, 1);
+    }
+  }
+
+  .inputError {
+    border: 1.5px solid $error-color;
+  }
+
+  .unRequired {
+    border: 1px solid $prussian-blue;
+
+    &:focus {
+      border: 1.5px solid $prussian-blue;
+    }
+  }
+}
