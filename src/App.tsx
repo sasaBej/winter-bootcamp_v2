@@ -4,6 +4,7 @@ import { Footer } from "./pages/components/footer/Footer";
 import { Header } from "./pages/components/header/Header";
 import "./App.scss";
 import { FormPage } from "./pages/formPage/FormPage";
+import { SubmissionFormPage } from "./pages/submissionFormPage/SubmissionFormPage";
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/form" element={<FormPage />} />
+        <Route path="/submission" element={<SubmissionFormPage />} />
       </Routes>
       <Footer />
     </BrowserRouter>

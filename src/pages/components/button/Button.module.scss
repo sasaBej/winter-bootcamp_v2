@@ -12,7 +12,13 @@
   &:hover {
     background-color: $button-hover;
   }
+  
   &:active {
     transform: translateY(0.125rem);
+  }
+
+  &:disabled {
+      opacity: .65;
+      pointer-events: none;
   }
 }

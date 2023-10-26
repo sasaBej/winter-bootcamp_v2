@@ -37,23 +37,23 @@ export const useFormValidation = () => {
   setEmailError(emailValidation(email));
   setAddressLineError(addressValidation(addressLine1));
   setCountryError(countryValidation(country));
-  setCityError(cityValidation(city))
+  setCityError(cityValidation(city));
 
 
-  const validateError = () => {
-     if ((firstNameError.message  !== "") && firstNameError.isTouched || 
-     (lastNameError.message !== "") && lastNameError.isTouched ||
-     (phoneNumberError.message !== "") && phoneNumberError.isTouched  ||
-     (emailError.message !== "") && emailError.isTouched ||
-     (addressLineError.message !== "") && addressLineError.isTouched ||
-     (countryError.message !== "") && countryError.isTouched ||
-     (cityError.message !== "") && cityError.isTouched
+  const isValidError = () => {
+     if ((firstNameError.message  === "") && firstNameError.isTouched && 
+     (lastNameError.message === "") && lastNameError.isTouched &&
+     (phoneNumberError.message === "") && phoneNumberError.isTouched  &&
+     (emailError.message === "") && emailError.isTouched &&
+     (addressLineError.message === "") && addressLineError.isTouched &&
+     (countryError.message === "") && countryError.isTouched &&
+     (cityError.message === "") && cityError.isTouched
      ) {
         return true;
     }
     return false;
   }
 
-  return validateError;
+  return isValidError;
 
 };

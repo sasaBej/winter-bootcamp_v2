@@ -1,0 +1,37 @@
+@import "../../styles/variables";
+
+.submissionFormPage {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: $athens-gray;
+  flex: 1;
+  max-width: $max-content-width;
+  width: 100%;
+  padding: .7rem;
+  gap: 3rem;
+
+  h2 {
+    text-align: center;
+    font-size: 3rem;
+    font-weight: $font-weight-bold;
+    font-style: $font-family-medium;
+    line-height: normal;
+    color: $prussian-blue;
+  }
+
+  sub {
+    font-size: 1.25rem;
+    line-height: normal;
+    font-weight: $font-weight-bold;
+    font-style: $font-family-medium;
+  }
+
+  p {
+    font-size: 1.25rem;
+    line-height: normal;
+    font-weight: $font-weight-bold;
+    font-style: $font-family-bold;
+  }
+}

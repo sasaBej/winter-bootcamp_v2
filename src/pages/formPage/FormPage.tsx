@@ -7,6 +7,7 @@ import { useFormValidation } from "./hooks/useFormValidation";
 import { SelectField } from "../components/selectField/SelectField";
 import { CountriesDataContext } from "../../shared/stores/CountryData.store";
 import styles from "./FormPage.module.scss";
+import { useNavigate } from "react-router-dom";
 
 export const FormPage = observer(() => {
   const {
@@ -30,10 +31,10 @@ export const FormPage = observer(() => {
     setCityValue,
     reset
   } = useContext(FormDataContext);
-
+  const navigate = useNavigate();
   const { countriesStatesData, fetchCountryStatesData, fetchCitiesData, citiesData } = useContext(CountriesDataContext);
 
-  const validateError = useFormValidation();
+  const isValidError = useFormValidation();
 
   useEffect(() => {
     fetchCountryStatesData();
@@ -42,6 +43,11 @@ export const FormPage = observer(() => {
       reset()
     }
   }, [reset, fetchCountryStatesData, fetchCitiesData]);
+
+  const handleData = () => {
+    sessionStorage.setItem("dataForm", JSON.stringify(formData));
+    navigate('/submission');
+  }
 
   return (
     <section className={styles.formPage}>
@@ -153,7 +159,8 @@ export const FormPage = observer(() => {
         </div>
         <div className={styles.checkFields}>
           <div className={styles.errors}>
-            {validateError() ? <div>Please fix the following errors to proceed:</div> : ""}
+            {/* refactor here */}
+            {!isValidError() ? <div>Please fix the following errors to proceed:</div> : ""}
             <p>{formErrors.firstNameError.isTouched ? formErrors.firstNameError.message : ""}</p>
             <p>{formErrors.lastNameError.isTouched ? formErrors.lastNameError.message : ""}</p>
             <p>{formErrors.phoneNumberError.isTouched ? formErrors.phoneNumberError.message : ""}</p>
@@ -162,7 +169,7 @@ export const FormPage = observer(() => {
             <p>{formErrors.countryError.isTouched ? formErrors.countryError.message : ""}</p>
             <p>{formErrors.cityError.isTouched ? formErrors.cityError.message : ""}</p>
           </div>
-          <Button title="Send" />
+          <Button title="Send" disabled={!isValidError()} onClick={handleData} />
         </div>
       </div>
     </section>
