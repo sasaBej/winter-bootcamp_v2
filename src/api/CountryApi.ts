@@ -1,3 +1,4 @@
+import { CitiesDataType, CountryType } from "../shared/stores/CountryData.types";
 import { BaseApi } from "./BaseApi";
 
 
@@ -6,12 +7,7 @@ export const getCountryAndStates = async () => {
     return data;
 }
 
-// export const getStates = async (country: CountryType): Promise<StatesTypes> => {
-//     const { data } = await BaseApi.post(`/states`, country );
-//     return data;
-// }
-
-// export const Countries = async (obj: unknown) => {
-//     const { data } = await BaseApi.post("/state/cities", obj);
-//     return data
-// }
+export const getCities = async (obj: CountryType): Promise<CitiesDataType> => {
+    const { data } = await BaseApi.post("/cities", obj);
+    return data;
+}

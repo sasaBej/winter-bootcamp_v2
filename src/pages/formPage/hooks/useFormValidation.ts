@@ -1,6 +1,6 @@
 import { useContext } from "react"
 import { FormDataContext } from "../FormPage.store"
-import { lastNameValidation, firstNameValidation, phoneNumberValidation, emailValidation, addressValidation, countryValidation } from "../../../shared/ValidationInputs";
+import { lastNameValidation, firstNameValidation, phoneNumberValidation, emailValidation, addressValidation, countryValidation, cityValidation } from "../../../shared/ValidationInputs";
 
 export const useFormValidation = () => {
   const {
@@ -10,7 +10,8 @@ export const useFormValidation = () => {
       phoneNumber,
       email,
       addressLine1,
-      country
+      country,
+      city
     },
     formErrors: {
       firstNameError,
@@ -18,14 +19,16 @@ export const useFormValidation = () => {
       phoneNumberError,
       emailError,
       addressLineError,
-      countryError
+      countryError,
+      cityError
     },
     setFirstNameError,
     setLastNameError,
     setPhoneNumberError,
     setEmailError,
     setAddressLineError,
-    setCountryError
+    setCountryError,
+    setCityError
   } = useContext(FormDataContext);
   
   setFirstNameError(firstNameValidation(firstName));
@@ -34,6 +37,7 @@ export const useFormValidation = () => {
   setEmailError(emailValidation(email));
   setAddressLineError(addressValidation(addressLine1));
   setCountryError(countryValidation(country));
+  setCityError(cityValidation(city))
 
 
   const validateError = () => {
@@ -42,7 +46,8 @@ export const useFormValidation = () => {
      (phoneNumberError.message !== "") && phoneNumberError.isTouched  ||
      (emailError.message !== "") && emailError.isTouched ||
      (addressLineError.message !== "") && addressLineError.isTouched ||
-     (countryError.message !== "") && countryError.isTouched
+     (countryError.message !== "") && countryError.isTouched ||
+     (cityError.message !== "") && cityError.isTouched
      ) {
         return true;
     }

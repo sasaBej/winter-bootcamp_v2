@@ -51,3 +51,11 @@ export const countryValidation = (name: string) => {
 
   return "";
 }
+
+export const cityValidation = (name: string) => {
+  if (!name.length) {
+    return "City is required";
+  }
+
+  return "";
+}

@@ -1,6 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import { createContext } from "react";
 import { EMPTY_FORM_DATA, EMPTY_FORM_ERRORS, FormDataType, FormErrorsType } from "./FormPage.types";
+import { countriesDataStore } from "../../shared/stores/CountryData.store";
 
 export class FormPageStore {
   public formData: FormDataType = EMPTY_FORM_DATA;
@@ -32,9 +33,19 @@ export class FormPageStore {
 
   public setAddressLine2Value = (value: string) => this.formData.addressLine2 = value;
 
-  public setCountryValue = (value: string) => this.formData.country = value;
+  public setCountryValue = (value: string) => {
+    this.formData.country = value;
+    countriesDataStore.setOneCountry(value);
+  };
+
   public setCountryError = (value: string) => this.formErrors.countryError.message = value;
   public setCountryIsTouched = () => this.formErrors.countryError.isTouched = true;
+
+  public setStateValue = (value: string) => this.formData.state = value;
+
+  public setCityValue = (value: string) => this.formData.city = value;
+  public setCityError = (value: string) => this.formErrors.cityError.message = value;
+  public setCityIsTouched = () => this.formErrors.cityError.isTouched = true;
 
   public reset = () => {
     this.formData = EMPTY_FORM_DATA;

@@ -6,6 +6,8 @@ export interface FormDataType {
   addressLine1: string;
   addressLine2: string;
   country: string;
+  state: string;
+  city: string;
 }
 
 export const EMPTY_FORM_DATA: FormDataType = {
@@ -15,7 +17,9 @@ export const EMPTY_FORM_DATA: FormDataType = {
   email: "",
   addressLine1: "",
   addressLine2: "",
-  country: ""
+  country: "",
+  state: "",
+  city: ""
 };
 
 export interface ErrorsDetails {
@@ -30,6 +34,7 @@ export interface FormErrorsType {
   emailError: ErrorsDetails;
   addressLineError: ErrorsDetails;
   countryError: ErrorsDetails;
+  cityError: ErrorsDetails;
 }
 
 export const EMPTY_FORM_ERRORS: FormErrorsType = {
@@ -54,6 +59,10 @@ export const EMPTY_FORM_ERRORS: FormErrorsType = {
     isTouched: false
   },
   countryError: {
+    message: "",
+    isTouched: false
+  },
+  cityError: {
     message: "",
     isTouched: false
   }

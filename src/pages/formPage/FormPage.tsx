@@ -4,11 +4,9 @@ import { InputField } from "../components/inputField/InputField";
 import { observer } from "mobx-react-lite";
 import { FormDataContext } from "./FormPage.store";
 import { useFormValidation } from "./hooks/useFormValidation";
-import styles from "./FormPage.module.scss";
 import { SelectField } from "../components/selectField/SelectField";
 import { CountriesDataContext } from "../../shared/stores/CountryData.store";
-
-const names = Array.from({ length: 1000 }, (_, i) => `Name ${i + 1}`);
+import styles from "./FormPage.module.scss";
 
 export const FormPage = observer(() => {
   const {
@@ -27,20 +25,23 @@ export const FormPage = observer(() => {
     setAddressLineIsTouched,
     setCountryValue,
     setCountryIsTouched,
+    setStateValue,
+    setCityIsTouched,
+    setCityValue,
     reset
   } = useContext(FormDataContext);
 
-  const { countriesData, fetchData } = useContext(CountriesDataContext);
+  const { countriesStatesData, fetchCountryStatesData, fetchCitiesData, citiesData } = useContext(CountriesDataContext);
 
   const validateError = useFormValidation();
 
   useEffect(() => {
-    fetchData();
+    fetchCountryStatesData();
 
     return () => {
       reset()
     }
-  }, [reset]);
+  }, [reset, fetchCountryStatesData, fetchCitiesData]);
 
   return (
     <section className={styles.formPage}>
@@ -115,47 +116,41 @@ export const FormPage = observer(() => {
             required={true}
             labelTitle="Country"
             onChange={setCountryValue}
+            onClick={() => fetchCitiesData()}
             selected={formData.country}
             onFocus={setCountryIsTouched}
             isValid={!formErrors.countryError.isTouched || !formErrors.countryError.message}
             children={
-              names.map((country, index) => (
-                <option key={index}>{country}</option>
+              countriesStatesData?.map((country, index) => (
+                <option key={index}>{country.name}</option>
+              ))
+            }
+          />
+          <SelectField
+            required={false}
+            labelTitle="State"
+            onChange={setStateValue}
+            selected={formData.country}
+            children={
+              countriesStatesData?.find(country => country.name === formData.country)?.states.map((state, index) => (
+                <option key={index} value={state.name}>{state.name}</option>
               ))
             }
           />
           <SelectField
             required={true}
-            labelTitle="Country"
-            onChange={setCountryValue}
-            selected={formData.country}
-            onFocus={setCountryIsTouched}
-            isValid={!formErrors.countryError.isTouched || !formErrors.countryError.message}
+            labelTitle="Cities"
+            onChange={setCityValue}
+            selected={formData.city}
+            onFocus={setCityIsTouched}
+            isValid={!formErrors.cityError.isTouched || !formErrors.cityError.message}
             children={
-              names.map((country, index) => (
-                <option key={index}>{country}</option>
+              citiesData?.data.map((cities, index) => (
+                <option key={index}>{cities}</option>
               ))
             }
           />
-          <SelectField
-            required={true}
-            labelTitle="Country"
-            onChange={setCountryValue}
-            selected={formData.country}
-            onFocus={setCountryIsTouched}
-            isValid={!formErrors.countryError.isTouched || !formErrors.countryError.message}
-            children={
-              names.map((country, index) => (
-                <option key={index}>{country}</option>
-              ))
-            }
-          />
-
         </div>
-        {
-
-          countriesData?.map(country => <p>{country.name}</p>)
-        }
         <div className={styles.checkFields}>
           <div className={styles.errors}>
             {validateError() ? <div>Please fix the following errors to proceed:</div> : ""}
@@ -165,6 +160,7 @@ export const FormPage = observer(() => {
             <p>{formErrors.emailError.isTouched ? formErrors.emailError.message : ""}</p>
             <p>{formErrors.addressLineError.isTouched ? formErrors.addressLineError.message : ""}</p>
             <p>{formErrors.countryError.isTouched ? formErrors.countryError.message : ""}</p>
+            <p>{formErrors.cityError.isTouched ? formErrors.cityError.message : ""}</p>
           </div>
           <Button title="Send" />
         </div>

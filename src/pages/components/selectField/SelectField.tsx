@@ -7,6 +7,7 @@ interface Props {
   selected: string;
   children: React.ReactNode;
   onChange: (value: string) => void;
+  onClick?: () => void;
   onFocus?: () => boolean;
   isValid?: boolean;
 }
@@ -18,7 +19,8 @@ export const SelectField = ({
   selected,
   children,
   isValid,
-  onFocus
+  onFocus,
+  onClick
 }: Props) => {
   return (
     <div className={styles.selectField}>
@@ -30,6 +32,7 @@ export const SelectField = ({
         required={required}
         onChange={event => onChange(event.target.value)}
         onFocus={onFocus}
+        onClick={onClick}
         className={classNames({
           [styles.inputValid]: isValid,
           [styles.inputError]: !isValid,
